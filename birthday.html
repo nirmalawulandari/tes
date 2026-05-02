@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun!</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fce4ec 0%, #fdf6ff 50%, #e8f5ff 100%);
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* ── LANDING ── */
+  #landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 40px 20px;
+    animation: fadeIn 0.6s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .landing-label {
+    font-size: 14px;
+    color: #c084a8;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  #gift-svg { animation: giftBounce 1.8s ease-in-out infinite; }
+  @keyframes giftBounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+
+  .gift-btn {
+    background: #f9a8c9;
+    color: #7c3060;
+    border: none;
+    border-radius: 50px;
+    padding: 18px 48px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.2s;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(240,120,175,0.3);
+  }
+  .gift-btn:hover { transform: scale(1.07); background: #f780af; }
+  .gift-btn:active { transform: scale(0.97); }
+
+  /* ── SURPRISE ── */
+  #surprise {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px 48px;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* confetti */
+  .confetti {
+    position: fixed;
+    top: -20px;
+    border-radius: 2px;
+    animation: confettiFall linear infinite;
+    pointer-events: none;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* balloons */
+  .balloon {
+    position: fixed;
+    bottom: -80px;
+    animation: balloonFloat ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes balloonFloat {
+    0%,100% { transform: translateY(0) rotate(-4deg); }
+    50%      { transform: translateY(-22px) rotate(4deg); }
+  }
+
+  /* stars */
+  .star {
+    position: fixed;
+    animation: starPulse ease-in-out infinite;
+    font-size: 20px;
+    pointer-events: none;
+  }
+  @keyframes starPulse {
+    0%,100% { opacity: 0.25; transform: scale(0.7); }
+    50%      { opacity: 1;    transform: scale(1.4); }
+  }
+
+  /* floating hearts */
+  .heart {
+    position: fixed;
+    animation: heartRise linear infinite;
+    font-size: 22px;
+    pointer-events: none;
+  }
+  @keyframes heartRise {
+    0%   { transform: translateY(0) scale(0.8); opacity: 0.9; }
+    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+  }
+
+  /* cake */
+  #cake-wrap {
+    z-index: 2;
+    animation: cakeEntrance 0.7s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;
+    margin-bottom: 20px;
+  }
+  @keyframes cakeEntrance {
+    0%   { transform: scale(0) rotate(-12deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg);   opacity: 1; }
+  }
+
+  .flame { animation: flicker 0.35s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+  @keyframes flicker {
+    0%   { transform: scaleX(1)    scaleY(1)    rotate(-2deg); opacity: 0.95; }
+    100% { transform: scaleX(0.78) scaleY(1.18) rotate(2deg);  opacity: 0.78; }
+  }
+
+  /* texts */
+  .hbd-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 42px;
+    color: #e05c9a;
+    text-align: center;
+    z-index: 2;
+    animation: titlePop 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    margin-bottom: 10px;
+    line-height: 1.15;
+    text-shadow: 0 2px 12px rgba(224,92,154,0.2);
+  }
+  @keyframes titlePop {
+    0%   { transform: scale(0.2); opacity: 0; }
+    100% { transform: scale(1);   opacity: 1; }
+  }
+
+  .hbd-sub {
+    font-size: 16px;
+    color: #b06090;
+    text-align: center;
+    z-index: 2;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s 0.35s both;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+  @keyframes fadeUp {
+    0%   { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-again {
+    z-index: 2;
+    background: #fbd5ea;
+    color: #a04070;
+    border: none;
+    border-radius: 50px;
+    padding: 11px 30px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-again:hover { background: #f9a8c9; transform: scale(1.04); }
+</style>
+</head>
+<body>
+
+<!-- ── LANDING PAGE ── -->
+<div id="landing">
+  <div class="landing-label">Ada kejutan untukmu</div>
+
+  <svg id="gift-svg" width="130" height="140" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="52" width="90" height="62" rx="6" fill="#fbc9de"/>
+    <rect x="10" y="52" width="90" height="62" rx="6" fill="none" stroke="#e08ab0" stroke-width="1.5"/>
+    <rect x="6"  y="38" width="98" height="20" rx="5" fill="#f9a8c9"/>
+    <rect x="6"  y="38" width="98" height="20" rx="5" fill="none" stroke="#e08ab0" stroke-width="1.5"/>
+    <rect x="48" y="38" width="14" height="76" rx="3" fill="#e05c9a" opacity="0.7"/>
+    <rect x="6"  y="44" width="98" height="9"  rx="3" fill="#e05c9a" opacity="0.7"/>
+    <ellipse cx="38" cy="36" rx="18" ry="10" fill="#f9a8c9" transform="rotate(-30,38,36)" stroke="#e08ab0" stroke-width="1"/>
+    <ellipse cx="72" cy="36" rx="18" ry="10" fill="#fbc9de" transform="rotate(30,72,36)"  stroke="#e08ab0" stroke-width="1"/>
+    <circle cx="55" cy="38" r="7" fill="#e05c9a"/>
+    <circle cx="30" cy="72" r="4" fill="#e05c9a" opacity="0.35"/>
+    <circle cx="80" cy="85" r="3" fill="#e05c9a" opacity="0.35"/>
+    <circle cx="60" cy="96" r="3" fill="#fbd5ea" opacity="0.55"/>
+    <circle cx="42" cy="92" r="2.5" fill="#fbd5ea" opacity="0.55"/>
+  </svg>
+
+  <button class="gift-btn" onclick="showSurprise()">🎁 Klik untuk membuka hadiah</button>
+</div>
+
+<!-- ── SURPRISE PAGE ── -->
+<div id="surprise">
+
+  <!-- Cake SVG -->
+  <div id="cake-wrap">
+    <svg width="220" height="220" viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg">
+      <!-- shadow -->
+      <ellipse cx="100" cy="200" rx="74" ry="9" fill="#f0b8d4" opacity="0.35"/>
+      <!-- layer 2 base -->
+      <rect x="18" y="118" width="164" height="72" rx="13" fill="#fbc9de"/>
+      <rect x="18" y="118" width="164" height="72" rx="13" fill="none" stroke="#e08ab0" stroke-width="1.2"/>
+      <rect x="18" y="147" width="164" height="12" fill="#f9a8c9" opacity="0.5"/>
+      <circle cx="50"  cy="154" r="5" fill="#fff" opacity="0.55"/>
+      <circle cx="100" cy="154" r="5" fill="#fff" opacity="0.55"/>
+      <circle cx="150" cy="154" r="5" fill="#fff" opacity="0.55"/>
+      <!-- frosting drips layer 2 -->
+      <path d="M18 120 Q30 104 42 120 Q54 104 66 120 Q78 104 90 120 Q102 104 114 120 Q126 104 138 120 Q150 104 162 120 Q174 104 182 120" fill="#fff" opacity="0.6"/>
+      <!-- layer 1 top -->
+      <rect x="34" y="66" width="132" height="58" rx="11" fill="#fde8f3"/>
+      <rect x="34" y="66" width="132" height="58" rx="11" fill="none" stroke="#e08ab0" stroke-width="1.2"/>
+      <rect x="34" y="88" width="132" height="10" fill="#fbc9de" opacity="0.5"/>
+      <text x="78"  y="106" font-size="14" text-anchor="middle" fill="#e05c9a" font-family="sans-serif">♥</text>
+      <text x="100" y="106" font-size="14" text-anchor="middle" fill="#c084a8" font-family="sans-serif">♥</text>
+      <text x="122" y="106" font-size="14" text-anchor="middle" fill="#e05c9a" font-family="sans-serif">♥</text>
+      <!-- frosting drips layer 1 -->
+      <path d="M34 68 Q46 52 58 68 Q70 52 82 68 Q94 52 106 68 Q118 52 130 68 Q142 52 154 68 Q160 60 166 68" fill="#fff" opacity="0.65"/>
+      <!-- candle 1 pink -->
+      <rect x="62" y="38" width="11" height="32" rx="3" fill="#f9c5db"/>
+      <ellipse class="flame" cx="67.5" cy="35" rx="5.5" ry="9"  fill="#fde68a"/>
+      <ellipse class="flame" cx="67.5" cy="37" rx="3"   ry="5.5" fill="#f59e0b"/>
+      <!-- candle 2 blue -->
+      <rect x="90" y="32" width="11" height="38" rx="3" fill="#bae6fd"/>
+      <ellipse class="flame" cx="95.5" cy="29" rx="5.5" ry="9"  fill="#fde68a" style="animation-delay:.12s"/>
+      <ellipse class="flame" cx="95.5" cy="31" rx="3"   ry="5.5" fill="#f59e0b" style="animation-delay:.12s"/>
+      <!-- candle 3 green -->
+      <rect x="118" y="40" width="11" height="30" rx="3" fill="#bbf7d0"/>
+      <ellipse class="flame" cx="123.5" cy="37" rx="5.5" ry="9"  fill="#fde68a" style="animation-delay:.24s"/>
+      <ellipse class="flame" cx="123.5" cy="39" rx="3"   ry="5.5" fill="#f59e0b" style="animation-delay:.24s"/>
+    </svg>
+  </div>
+
+  <div class="hbd-title">Selamat Ulang Tahun!</div>
+  <div class="hbd-sub">Semoga hari-harimu selalu dipenuhi kebahagiaan &amp; cinta ✨</div>
+  <button class="btn-again" onclick="reset()">↩ Ulangi kejutan</button>
+</div>
+
+<script>
+const CONFETTI_COLORS = ['#f9a8c9','#fde68a','#a5f3fc','#c4b5fd','#bbf7d0','#fda4af','#fbcfe8','#fcd34d'];
+const BALLOON_DATA = [
+  {body:'#fbc9de', hi:'#fde8f3', str:'#e08ab0'},
+  {body:'#c4b5fd', hi:'#ede9fe', str:'#7c3aed'},
+  {body:'#a5f3fc', hi:'#e0f9ff', str:'#0ea5e9'},
+  {body:'#bbf7d0', hi:'#d1fae5', str:'#10b981'},
+  {body:'#fde68a', hi:'#fef9c3', str:'#f59e0b'},
+  {body:'#fda4af', hi:'#ffe4e6', str:'#e11d48'},
+];
+const STAR_POS = [
+  {l:'6%', t:'10%', d:'0s'},   {l:'88%', t:'7%',  d:'.3s'},
+  {l:'4%', t:'52%', d:'.6s'},  {l:'93%', t:'48%', d:'.9s'},
+  {l:'48%',t:'4%',  d:'1.2s'}, {l:'20%', t:'82%', d:'.5s'},
+  {l:'78%',t:'80%', d:'.8s'},  {l:'62%', t:'90%', d:'1s'},
+];
+
+let confettiTimer = null;
+let heartTimer = null;
+
+function showSurprise() {
+  document.getElementById('landing').style.display = 'none';
+  const s = document.getElementById('surprise');
+  s.style.display = 'flex';
+  addStars();
+  addBalloons();
+  startConfetti();
+  startHearts();
+}
+
+function reset() {
+  clearInterval(confettiTimer);
+  clearInterval(heartTimer);
+  confettiTimer = null;
+  heartTimer = null;
+  const s = document.getElementById('surprise');
+  s.querySelectorAll('.confetti,.balloon,.star,.heart').forEach(e => e.remove());
+  s.style.display = 'none';
+  document.getElementById('landing').style.display = 'flex';
+}
+
+function addStars() {
+  const s = document.getElementById('surprise');
+  STAR_POS.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'star';
+    el.textContent = '✦';
+    el.style.left = p.l;
+    el.style.top  = p.t;
+    el.style.animationDelay    = p.d;
+    el.style.animationDuration = (1.4 + Math.random()) + 's';
+    el.style.color = CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)];
+    s.appendChild(el);
+  });
+}
+
+function addBalloons() {
+  const s = document.getElementById('surprise');
+  [4, 16, 72, 86].forEach((lp, i) => {
+    const c   = BALLOON_DATA[i % BALLOON_DATA.length];
+    const sc  = 0.78 + Math.random() * 0.38;
+    const dur = 2.8 + Math.random() * 1.6;
+    const del = Math.random() * 1.2;
+    const w   = document.createElement('div');
+    w.className = 'balloon';
+    w.style.left              = lp + '%';
+    w.style.animationDuration = dur + 's';
+    w.style.animationDelay    = del + 's';
+    w.innerHTML = `<svg width="${Math.round(54*sc)}" height="${Math.round(82*sc)}" viewBox="0 0 54 82" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="27" cy="30" rx="23" ry="28" fill="${c.body}"/>
+      <ellipse cx="20" cy="18" rx="7"  ry="10" fill="${c.hi}" opacity="0.5"/>
+      <path d="M27 58 Q25 66 27 74 Q29 66 27 58" fill="${c.str}"/>
+      <line x1="27" y1="74" x2="27" y2="82" stroke="${c.str}" stroke-width="1.2"/>
+    </svg>`;
+    s.appendChild(w);
+  });
+}
+
+function makeConfetti() {
+  const s  = document.getElementById('surprise');
+  const el = document.createElement('div');
+  el.className = 'confetti';
+  el.style.left              = Math.random()*100 + '%';
+  el.style.background        = CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)];
+  el.style.width             = (6 + Math.random()*8) + 'px';
+  el.style.height            = (6 + Math.random()*8) + 'px';
+  el.style.borderRadius      = Math.random() > 0.5 ? '50%' : '2px';
+  el.style.animationDuration = (2.5 + Math.random()*3) + 's';
+  el.style.animationDelay    = (Math.random()*0.4) + 's';
+  s.appendChild(el);
+  setTimeout(() => el.remove(), 6000);
+}
+
+function startConfetti() {
+  for (let i = 0; i < 22; i++) setTimeout(makeConfetti, i * 70);
+  confettiTimer = setInterval(() => {
+    for (let i = 0; i < 3; i++) makeConfetti();
+  }, 700);
+}
+
+function makeHeart() {
+  const s  = document.getElementById('surprise');
+  const el = document.createElement('div');
+  el.className = 'heart';
+  el.textContent = '♥';
+  el.style.left              = (8 + Math.random()*84) + '%';
+  el.style.bottom            = '-40px';
+  el.style.color             = CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)];
+  el.style.fontSize          = (14 + Math.random()*16) + 'px';
+  el.style.animationDuration = (4 + Math.random()*4) + 's';
+  el.style.animationDelay    = (Math.random()*0.5) + 's';
+  s.appendChild(el);
+  setTimeout(() => el.remove(), 9000);
+}
+
+function startHearts() {
+  for (let i = 0; i < 6; i++) setTimeout(makeHeart, i*300);
+  heartTimer = setInterval(makeHeart, 1200);
+}
+</script>
+</body>
+</html>
